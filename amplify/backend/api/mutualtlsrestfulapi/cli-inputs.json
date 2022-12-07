@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/mutualtlsapi": {
+      "name": "/mutualtlsapi",
+      "lambdaFunction": "mutualtlslambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

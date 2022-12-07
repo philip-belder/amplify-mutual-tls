@@ -1,0 +1,101 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    },
+    "apimutualtlsrestfulapiRootUrl": {
+      "Type": "String",
+      "Description": "Input parameter describing RootUrl attribute for api/mutualtlsrestfulapi resource"
+    },
+    "apimutualtlsrestfulapiApiName": {
+      "Type": "String",
+      "Description": "Input parameter describing ApiName attribute for api/mutualtlsrestfulapi resource"
+    },
+    "apimutualtlsrestfulapiApiId": {
+      "Type": "String",
+      "Description": "Input parameter describing ApiId attribute for api/mutualtlsrestfulapi resource"
+    },
+    "Domain": {
+      "Description": "Domain for API Gateway API's",
+      "Type": "String"
+    },
+    "HostedZoneId": {
+      "Description": "Hosted Zone Id in which we want to add A record",
+      "Type": "String"
+    },
+    "TruststoreUri": {
+      "Type": "String"
+    },
+    "RegionalCertificateArn": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "MutualTLSCustomDomain": {
+      "Type": "AWS::ApiGateway::DomainName",
+      "Properties": {
+        "DomainName": {
+          "Fn::Sub": "${env}-testapi.${Domain}"
+        },
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        },
+        "MutualTlsAuthentication": {
+          "TruststoreUri": {
+            "Ref": "TruststoreUri"
+          }
+        },
+        "RegionalCertificateArn": {
+          "Ref": "RegionalCertificateArn"
+        },
+        "SecurityPolicy": "TLS_1_2"
+      }
+    },
+    "mutuaTLSMapping": {
+      "Type": "AWS::ApiGateway::BasePathMapping",
+      "Properties": {
+        "DomainName": {
+          "Ref": "MutualTLSCustomDomain"
+        },
+        "RestApiId": {
+          "Ref": "apimutualtlsrestfulapiApiId"
+        },
+        "Stage": {
+          "Ref": "env"
+        }
+      }
+    },
+    "Route53RecordSetGroup": {
+      "Type": "AWS::Route53::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "${env}-testapi.${Domain}"
+        },
+        "Type": "A",
+        "HostedZoneId": {
+          "Ref": "HostedZoneId"
+        },
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "MutualTLSCustomDomain",
+              "RegionalDomainName"
+            ]
+          },
+          "EvaluateTargetHealth": false,
+          "HostedZoneId": {
+            "Fn::GetAtt": [
+              "MutualTLSCustomDomain",
+              "RegionalHostedZoneId"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {},
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.5.1\",\"stackType\":\"custom-customCloudformation\",\"metadata\":{}}"
+}

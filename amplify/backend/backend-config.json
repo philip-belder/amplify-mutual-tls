@@ -1,0 +1,42 @@
+{
+  "function": {
+    "mutualtlslambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "api": {
+    "mutualtlsrestfulapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "mutualtlslambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "custom": {
+    "domainMappingAndRoute53": {
+      "service": "customCloudformation",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "mutualtlsrestfulapi",
+          "attributes": [
+            "RootUrl",
+            "ApiName",
+            "ApiId"
+          ]
+        }
+      ]
+    }
+  }
+}

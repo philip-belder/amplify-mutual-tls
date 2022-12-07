@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifymutualtls-dev-142331-authRole",
+      "UnauthRoleArn": "arn:aws:iam::658077784589:role/amplify-amplifymutualtls-dev-142331-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::658077784589:role/amplify-amplifymutualtls-dev-142331-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-amplifymutualtls-dev-142331-deployment",
+      "UnauthRoleName": "amplify-amplifymutualtls-dev-142331-unauthRole",
+      "StackName": "amplify-amplifymutualtls-dev-142331",
+      "StackId": "arn:aws:cloudformation:eu-west-1:658077784589:stack/amplify-amplifymutualtls-dev-142331/f7892390-7629-11ed-8fe0-02ddf68814b5",
+      "AmplifyAppId": "d2q3r8q91j0ciw"
+    },
+    "categories": {
+      "function": {
+        "mutualtlslambda": {
+          "deploymentBucketName": "amplify-amplifymutualtls-dev-142331-deployment",
+          "s3Key": "amplify-builds/mutualtlslambda-6f6e673958657a47547a-build.zip"
+        }
+      },
+      "api": {
+        "mutualtlsrestfulapi": {}
+      },
+      "custom": {
+        "domainMappingAndRoute53": {}
+      }
+    }
+  }
+}
