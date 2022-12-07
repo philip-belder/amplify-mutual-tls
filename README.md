@@ -7,7 +7,7 @@ Helpful resources:
 - More details on this folder & generated files: https://docs.amplify.aws/cli/reference/files
 - Join Amplify's community: https://amplify.aws/community/
 
-#parameters.json example file
+# parameters.json example file
 - "Domain": "example.com",
 - "HostedZoneId": "s3://my_bucket/truststore.pem",
 - "TruststoreUri": "Z06541517....",,
